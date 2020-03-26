@@ -124,11 +124,12 @@ def setupSSHD(ngrok_token = None, ngrok_region = None, check_gpu_available = Fal
   if check_gpu_available and not _check_gpu_available():
     return False
 
-  print("---")
-  print("Copy&paste your tunnel authtoken from https://dashboard.ngrok.com/auth")
-  print("(You need to sign up for ngrok and login,)")
-  #Set your ngrok Authtoken.
-  ngrok_token = ngrok_token or getpass.getpass()
+  if not ngrok_token:
+    print("---")
+    print("Copy&paste your tunnel authtoken from https://dashboard.ngrok.com/auth")
+    print("(You need to sign up for ngrok and login,)")
+    #Set your ngrok Authtoken.
+    ngrok_token = getpass.getpass()
 
   if not ngrok_region:
     print("Select your ngrok region:")
